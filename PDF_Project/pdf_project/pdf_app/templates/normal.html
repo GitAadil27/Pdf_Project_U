@@ -168,7 +168,7 @@
 
     <div class="container">
         <form method="post">
-           
+           {% csrf_token %}
             <div>
                 {{ form.type_field.label_tag }}
                 <select name="{{ form.type_field.name }}" class="custom-dropdown">
@@ -186,7 +186,7 @@
             {{ form.remittername.label_tag }} {{ form.remittername }}
 
             <div id="common-fields"></div>
-
+                
             <div id="stp-fields" style="display: none;">
                 {{ form.stp_field.label_tag }} {{ form.stp_field }}
                 {{ form.reissue_field.label_tag }} {{ form.reissue_field }}
