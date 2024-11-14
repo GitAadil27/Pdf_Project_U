@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-s9tlp$709+8eu%m6b0v3dt@4q@tku$*!+10f#n=))(3mz(78*q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'city.pythonanywhere.com']
+ALLOWED_HOSTS = ['*', 'city.pythonanywhere.com','cbkupload.onrender.com/']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -68,6 +69,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pdf_project.wsgi.application'
+CSRF_TRUSTED_ORIGINS = ['https://yourdomain.com', 'https://anotherdomain.com']
+
 
 
 # Database
