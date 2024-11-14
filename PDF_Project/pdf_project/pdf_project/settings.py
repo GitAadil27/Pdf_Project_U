@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-s9tlp$709+8eu%m6b0v3dt@4q@tku$*!+10f#n=))(3mz(78*q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','cbkupload.onrender.com']
 
 
 # Application definition
