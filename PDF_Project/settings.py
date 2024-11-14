@@ -69,7 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pdf_project.wsgi.application'
-CSRF_TRUSTED_ORIGINS = ['*', 'https://cbkupload.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['*', 'https://cbkupload.onrender.com','cbkupload.onrender.com']
 CSRF_TRUSTED_ORIGINS = ['*', 'cbkupload.onrender.com']
 
 
