@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Exchange Form Generator</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
+
+        /* Your existing styles remain the same */
+
+        /* Added styles for form validation */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .form-field {
+            margin-bottom: 1rem;
+        }
+
+        input.error {
+            border-color: #dc3545;
+        }
+
+        .success-message {
+            background-color: #28a745;
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
+    <link rel="icon" href="{% static 'images/calendar.ico' %}">
+</head>
+<body>
+    <header>
+        City Exchange Form Generator
+    </header>
+
+    <div class="container">
+        <div id="success-message" class="success-message">Form submitted successfully!</div>
+        <form method="post" id="txnForm">
+            {% csrf_token %}
+
+            <div class="form-field">
+                {{ form.type_field.label_tag }}
+                <select name="{{ form.type_field.name }}" id="type_field" class="custom-dropdown" required>
+                    {% for value, label in form.type_field.field.choices %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-field">
+                {{ form.branch_field.label_tag }}
+                {{ form.branch_field }}
+            </div>
+
+            <div class="form-field">
+                {{ form.remittance_field.label_tag }}
+                {{ form.remittance_field }}
+            </div>
+
+            <div class="form-field">
+                {{ form.correspondant_field.label_tag }}
+                {{ form.correspondant_field }}
+            </div>
+
+            <div class="form-field">
+                {{ form.fieldtxnrefnumber.label_tag }}
+                {{ form.fieldtxnrefnumber }}
+            </div>
+
+            <div class="form-field">
+                {{ form.civilidnumber.label_tag }}
+                {{ form.civilidnumber }}
+            </div>
+
+            <div class="form-field">
+                {{ form.remittername.label_tag }}
+                {{ form.remittername }}
+            </div>
+
+            <!-- Conditional fields -->
+            <div id="stp-fields" style="display: none;">
+                <div class="form-field">
+                    {{ form.stp_field.label_tag }}
+                    {{ form.stp_field }}
+                </div>
+                <div class="form-field">
+                    {{ form.reissue_field.label_tag }}
+                    {{ form.reissue_field }}
+                </div>
+            </div>
+
+            <div id="amend-fields" style="display: none;">
+                <div class="form-field">
+                    {{ form.amendment_field.label_tag }}
+                    {{ form.amendment_field }}
+                </div>
+            </div>
+
+            <div id="recall-fields" style="display: none;">
+                <div class="form-field">
+                    {{ form.recall_field.label_tag }}
+                    {{ form.recall_field }}
+                </div>
+            </div>
+
+            <button type="submit">Generate PDF</button>
+        </form>
+    </div>
+
+    <div id="toast" class="toast">PDF generated successfully!</div>
+    <div id="toastMessage" class="toast">File downloaded successfully. Please check your downloads folder.</div>
+
+    <footer>
+        <p>Developed by a and b Exclusively for c</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('txnForm');
+            const modeSelect = document.getElementById('type_field');
+            const stpFields = document.getElementById('stp-fields');
+            const amendFields = document.getElementById('amend-fields');
+            const recallFields = document.getElementById('recall-fields');
+            const toastMessage = document.getElementById('toastMessage');
+            const successMessage = document.getElementById('success-message');
+
+            function updateFields() {
+                const selectedMode = modeSelect.value;
+                stpFields.style.display = selectedMode === 'Stop Payment' ? 'block' : 'none';
+                amendFields.style.display = selectedMode === 'Amendment' ? 'block' : 'none';
+                recallFields.style.display = selectedMode === 'Recall Of Funds' ? 'block' : 'none';
+            }
+
+            modeSelect.addEventListener('change', updateFields);
+            updateFields();
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Basic form validation
+                let isValid = true;
+                const requiredFields = form.querySelectorAll('[required]');
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('error');
+                        let errorDiv = field.parentElement.querySelector('.error-message');
+                        if (!errorDiv) {
+                            errorDiv = document.createElement('div');
+                            errorDiv.className = 'error-message';
+                            field.parentElement.appendChild(errorDiv);
+                        }
+                        errorDiv.textContent = 'This field is required';
+                    } else {
+                        field.classList.remove('error');
+                        const errorDiv = field.parentElement.querySelector('.error-message');
+                        if (errorDiv) errorDiv.remove();
+                    }
+                });
+
+                if (isValid) {
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    toastMessage.style.display = 'block';
+
+                    // Submit form after delay
+                    setTimeout(() => {
+                        form.submit();
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

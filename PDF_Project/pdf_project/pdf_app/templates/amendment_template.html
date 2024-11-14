@@ -1,0 +1,53 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h2 class="form-title">Amendment Request Form</h2>
+    
+    <div class="form-field">Date: {{ date }} {{ time }}</div>
+    <div class="form-field">Mode: {{ mode }}</div>
+    <div class="form-field">Branch: {{ branch }}</div>
+    <div class="form-field">Remittance: {{ remittance }}</div>
+    <div class="form-field">Refnumber: {{ refnumber }}</div>
+    <div class="form-field">Correspondant: {{ correspondant }}</div>
+    <div class="form-field">Civil ID: {{ civilid }}</div>
+    <div class="form-field">Remitter Name: {{ remittername }}</div>
+    
+    <div class="amendment-details">
+        <h3>Amendment Details</h3>
+        <div class="form-field">
+            <strong>Field to Amend:</strong> {{ amendment_field }}
+        </div>
+        <div class="form-field">
+            <strong>Current Value:</strong> {{ current_value }}
+        </div>
+        <div class="form-field">
+            <strong>New Value:</strong> {{ new_value }}
+        </div>
+    </div>
+
+    <div class="asterisk-line"></div>
+    <div class="form-field">
+        I confirm that:
+        <ul>
+            <li>The above amendment details are correct</li>
+            <li>I understand that amendment charges may apply</li>
+            <li>The amendment is subject to processing by the correspondent bank</li>
+        </ul>
+    </div>
+    <div class="asterisk-line"></div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>Staff Signature</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>Customer Signature</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>HO Signature</div>
+        </div>
+    </div>
+{% endblock %}

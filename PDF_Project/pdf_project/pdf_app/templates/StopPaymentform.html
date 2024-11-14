@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Payments Form</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm 10mm;
+        }
+
+        body {
+            font-family: 'Book Antiqua', Palatino, serif;
+            margin: 0;
+            padding: 0;
+            color: #000;
+            line-height: 1.4;
+        }
+
+        .outer-container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            border: 1px solid #000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            margin-bottom: 10px;
+            padding-left: 80px;
+            box-sizing: border-box;
+        }
+
+        .logo img {
+            width: 530px;
+            height: 100px;
+            object-fit: contain;
+            display: block;
+        }
+
+        h3 {
+            text-align: center;
+            margin: 10px 0 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'Book Antiqua', Palatino, serif;
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .form-row label {
+            width: 200px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: left;
+            font-family: 'Book Antiqua', Palatino, serif;
+            position: absolute;
+            left: 40px;
+        }
+
+        .form-row input {
+            width: 350px;
+            height: 24px;
+            border: 1px solid #000;
+            padding: 2px 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: 'Book Antiqua', Palatino, serif;
+            margin-left: 240px;
+        }
+
+        .disclaimer {
+            margin: 30px 40px;
+            font-size: 13px;
+            line-height: 1.5;
+            font-family: 'Book Antiqua', Palatino, serif;
+        }
+
+        .signature {
+            text-align: center;
+            margin: 50px 40px 30px auto;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-family: 'Book Antiqua', Palatino, serif;
+        }
+
+        .signature-line {
+            border-top: 1px solid #000;
+            width: 200px;
+            margin-bottom: 5px;
+        }
+
+        .signature-text {
+            font-size: 14px;
+            font-weight: bold;
+            font-family: 'Book Antiqua', Palatino, serif;
+            width: 200px;
+            text-align: center;
+        }
+
+        .company-use {
+            margin: 30px 40px 40px 40px;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+
+        .company-use-title {
+            font-weight: bold;
+            margin: 0 0 40px 0;
+            font-size: 14px;
+            text-align: center;
+            padding-bottom: 10px;
+            font-family: 'Book Antiqua', Palatino, serif;
+        }
+
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+        }
+
+        .signature-box {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            flex: 1;
+            margin: 0 10px;
+            position: relative;
+            font-family: 'Book Antiqua', Palatino, serif;
+        }
+
+        .signature-box::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            border-top: 1px dashed #000;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .print-date {
+            text-align: right;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-right: 40px;
+            font-family: 'Book Antiqua', Palatino, serif;
+        }
+    </style>
+</head>
+<body>
+<div class="outer-container">
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'images/onetwo.jpg' %}" alt="City Exchange Logo">
+        </div>
+
+        <h3>Stop Payments Form</h3>
+
+        <div class="form-row">
+            <label>Date</label>
+            <input type="text" value="{{ current_datetime|date:'d/m/Y' }}" readonly>
+        </div>
+
+        <div class="form-row">
+            <label>Branch</label>
+            <input type="text" value="{{ branch }}" readonly>
+        </div>
+
+        <div class="form-row">
+            <label>TT No</label>
+            <input type="text" value="{{ refnumber }}" readonly>
+        </div>
+
+        <div class="form-row">
+            <label>Correspondant Bank</label>
+            <input type="text" value="{{ correspondant }}" readonly>
+        </div>
+
+        <div class="form-row">
+            <label>Remitter's Name</label>
+            <input type="text" value="{{ remittername }}" readonly>
+        </div>
+
+        <div class="form-row">
+            <label>Civil Id</label>
+            <input type="text" value="{{ civilid }}" readonly>
+        </div>
+
+        <div class="form-row">
+            <label>Stop Payment Reason</label>
+            <input type="text" value="{{ stop_reason }}" readonly>
+        </div>
+
+        <div class="form-row">
+            <label>Reissue</label>
+            <input type="text" value="{{ reissue_yn }}" readonly>
+        </div>
+
+        <div class="disclaimer">
+           I confirm receipt of the details concerning the returned transaction and the initiation of the stop payment process for the purpose of issuing a reissue or refund.
+        </div>
+
+        <div class="signature">
+            <div class="signature-line"></div>
+            <div class="signature-text">CUSTOMER SIGNATURE</div>
+        </div>
+
+        <div class="company-use">
+            <div class="company-use-title">For Office Use Only</div>
+
+            <div class="signatures">
+                <div class="signature-box">
+                    <div class="signature-text">Staff Signature</div>
+                </div>
+                <div class="signature-box">
+                    <div class="signature-text">Branch Manager</div>
+                    <div class="signature-text">Signature &</div>
+                    <div class="signature-text">Branch Stamp</div>
+                </div>
+                <div class="signature-box">
+                    <div class="signature-text">Rem Dept </div>
+                    <div class="signature-text">Signature </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="print-date">
+            Printed On: {{ current_datetime|date:"d/m/Y, g:i:s A" }}
+        </div>
+</div>
+
+</body>
+</html>

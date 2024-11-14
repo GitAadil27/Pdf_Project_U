@@ -1,0 +1,42 @@
+# forms/templates/recall_template.html
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h2 class="form-title">Recall Request Form</h2>
+
+    <div class="form-field">Date: {{ date }} {{ time }}</div>
+    <div class="form-field">Mode: {{ mode }}</div>
+    <div class="form-field">Branch: {{ branch }}</div>
+    <div class="form-field">Remittance: {{ remittance }}</div>
+    <div class="form-field">Refnumber: {{ refnumber }}</div>
+    <div class="form-field">Correspondant: {{ correspondant }}</div>
+    <div class="form-field">Civil ID: {{ civilid }}</div>
+    <div class="form-field">Remitter Name: {{ remittername }}</div>
+    <div class="form-field">Recall Reason: {{ recall_reason }}</div>
+
+    <div class="asterisk-line"></div>
+    <div class="form-field">
+        I understand that:
+        <ul>
+            <li>The recall request is subject to beneficiary's consent</li>
+            <li>Charges may apply as per the correspondent bank's policy</li>
+            <li>City Exchange cannot guarantee the success of the recall request</li>
+        </ul>
+    </div>
+    <div class="asterisk-line"></div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>Staff Signature</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>Customer Signature</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>HO Signature</div>
+        </div>
+    </div>
+{% endblock %}

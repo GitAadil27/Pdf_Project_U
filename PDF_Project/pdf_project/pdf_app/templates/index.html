@@ -1,0 +1,235 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amendment/Stop Payment Form</title>
+    <style>
+        /* Import a custom font */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #213871;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        footer {
+            background-color: #213871;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding-bottom: 60px; /* Added extra padding to prevent button cut-off */
+        }
+        h2 {
+            color: #213871;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 14px;
+            color: #213871;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        select:focus, input[type="text"]:focus {
+            border-color: #213871;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #213871;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #3e5d85;
+            transform: scale(1.05);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .amendment-type {
+            display: flex;
+            flex-direction: column;
+        }
+        .amendment-type label {
+            margin-left: 10px;
+        }
+        .amendment-type input[type="radio"] {
+            margin: 5px;
+        }
+        .dropdown {
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            color: #213871;
+            border-radius: 5px;
+        }
+        .dropdown option {
+            color: #213871;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        input[type="text"].error {
+            border-color: red;
+        }
+        input[type="text"].valid {
+            border-color: green;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>Amendment/Stop Payment Form</h1>
+</nav>
+<div class="container">
+    <h2>Enter the Details</h2>
+    <form id="amendment-form">
+        <div class="form-group">
+            <label for="branch">Branch</label>
+            <select id="branch" class="dropdown">
+                <option value="">Select Branch</option>
+                <option value="branch1">Fahaheel</option>
+                <option value="branch2">Farwaniya</option>
+                <option value="branch3">Hawally</option>
+                <option value="branch4">Jleeb 1</option>
+                <option value="branch5">Jleeb 2</option>
+                <option value="branch6">Mahboula</option>
+                <option value="branch7">Mobile 1</option>
+                <option value="branch8">Mobile 2</option>
+                <option value="branch9">Qibla</option>
+                <option value="branch10">Safat</option>
+                <option value="branch11">Abdali</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="product">TT/Express Product</label>
+            <select id="product" class="dropdown">
+                <option value="">Select Product</option>
+                <option value="tt">Transfast</option>
+                <option value="express">Himal Remit</option>
+                <option value="express">Western Union</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="correspondent">Correspondent</label>
+            <select id="correspondent" class="dropdown">
+                <option value="">Select Correspondent</option>
+                <option value="correspondent1">Correspondent 1</option>
+                <option value="correspondent2">Correspondent 2</option>
+                <option value="correspondent3">Correspondent 3</option>
+                <option value="correspondent4">Correspondent 4</option>
+                <option value="correspondent5">Correspondent 5</option>
+                <!-- Add other 25 correspondents -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="civil-id">CIVIL ID Number</label>
+            <input type="text" id="civil-id" maxlength="12" placeholder="Enter CIVIL ID Number" required>
+            <div id="error-message" class="error"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="transaction-number">Transaction Number</label>
+            <input type="text" id="transaction-number" maxlength="16" placeholder="Enter Transaction Number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="remitter-name">Remitter Name</label>
+            <input type="text" id="remitter-name" placeholder="Enter Remitter Name" required>
+        </div>
+
+        <div class="form-group amendment-type">
+            <label>What type of amendment do you want?</label>
+            <label>
+                <input type="radio" name="amendment" value="beneficiary-name-change"> Beneficiary name change
+            </label>
+            <label>
+                <input type="radio" name="amendment" value="beneficiary-account-change"> Beneficiary account change
+            </label>
+            <label>
+                <input type="radio" name="amendment" value="beneficiary-bank-details-change"> Beneficiary bank details change
+            </label>
+            <label>
+                <input type="radio" name="amendment" value="beneficiary-branch-name-change"> Beneficiary branch name change
+            </label>
+            <label>
+                <input type="radio" name="amendment" value="payment-mode-change"> Payment mode change
+            </label>
+            <label>
+                <input type="radio" name="amendment" value="reprocess"> Reprocess
+            </label>
+            <label>
+                <input type="radio" name="amendment" value="other"> Other
+            </label>
+        </div>
+
+        <button type="submit" class="submit-btn">SUBMIT</button>
+    </form>
+</div>
+
+<footer>
+    <p>Developed by Karina and Aadil Exclusively for City International Exchange</p>
+</footer>
+
+<script>
+    document.getElementById('civil-id').addEventListener('input', function(event) {
+        var civilId = event.target.value;
+        var errorMessage = document.getElementById('error-message');
+        var civilIdInput = event.target;
+
+        if (civilId.length === 12 && /^[0-9]{12}$/.test(civilId)) {
+            civilIdInput.classList.remove('error');
+            civilIdInput.classList.add('valid');
+            errorMessage.textContent = ''; // Clear error message
+        } else {
+            civilIdInput.classList.remove('valid');
+            civilIdInput.classList.add('error');
+            errorMessage.textContent = 'CIVIL ID must be exactly 12 digits.';
+        }
+    });
+
+    document.getElementById('amendment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert('Form Submitted!');
+        // Here you can add functionality to generate PDF or handle the form data
+    });
+</script>
+
+</body>
+</html>

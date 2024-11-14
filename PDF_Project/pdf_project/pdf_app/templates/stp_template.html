@@ -1,0 +1,35 @@
+{% extends "base_template.html" %}
+
+{% pytho content %}
+    <div class="form-field">Date: {{ date }} {{ time }}</div>
+    <div class="form-field">Mode: {{ mode }}</div>
+    <div class="form-field">Branch: {{ branch }}</div>
+    <div class="form-field">Remittance: {{ remittance }}</div>
+    <div class="form-field">Refnumber: {{ refnumber }}</div>
+    <div class="form-field">Correspondant: {{ correspondant }}</div>
+    <div class="form-field">Civil ID: {{ civilid }}</div>
+    <div class="form-field">Remitter Name: {{ remittername }}</div>
+    <div class="form-field">Stop Payment Reason: {{ stp_reason }}</div>
+    <div class="form-field">Reissue: {{ reissue_yn }}</div>
+
+    <div class="asterisk-line"></div>
+    <div class="form-field">
+        I agree that City Exchange is not responsible for any costs or losses for funds incurred in doing this stop payment.
+    </div>
+    <div class="asterisk-line"></div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>Staff Signature</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>Customer Signature</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>HO Signature</div>
+        </div>
+    </div>
+{% endblock %}

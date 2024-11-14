@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Exchange Form Generator</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
+
+        @font-face {
+            font-family: 'SenExtraBold';
+            src: url('/static/fonts/sen-extrabold.otf') format('opentype');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+         body {
+            font-family: 'SenExtraBold', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+          header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #213871;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            height: 50px;
+            font-size: 1.5em;
+            font-weight: 800;
+            font-family: 'SenExtraBold', sans-serif;
+        }
+
+         footer {
+            background-color: #213871;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            font-family: 'SenExtraBold', sans-serif;
+            font-weight: 800;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .toast {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: none;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        label {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Sen', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        select {
+            width: 200px;
+            max-width: 100%;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            font-family: 'Sen', sans-serif;
+        }
+
+        select[name="amendment_field"] {
+            width: 400px;
+            height: 35px;
+            font-size: 14px;
+            margin-top: 20px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[name="newly_amended"] {
+            width: 735px;
+            height: 18px;
+            margin-top: 20px;
+
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #213871;
+            box-shadow: 0 0 0 2px rgba(33, 56, 113, 0.2);
+        }
+
+        button {
+            padding: 15px 20px;
+            background-color: #213871;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Sen', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 20px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        button:hover {
+            color: #4CAF50;
+             background-color: #162a57;
+            }
+        header:hover, footer:hover {
+                color: #4CAF50;
+            }
+    </style>
+    <link rel="icon" href="{% static 'images/C.ico' %}">
+</head>
+<body>
+    <header>
+        City Exchange Form Generator
+    </header>
+
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                {{ form.type_field.label_tag }}
+                <select name="{{ form.type_field.name }}" class="custom-dropdown">
+                    {% for value, label in form.type_field.field.choices %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            {{ form.branch_field.label_tag }} {{ form.branch_field }}
+            {{ form.remittance_field.label_tag }} {{ form.remittance_field }}
+            {{ form.correspondant_field.label_tag }} {{ form.correspondant_field }}
+            {{ form.fieldtxnrefnumber.label_tag }} {{ form.fieldtxnrefnumber }}
+            {{ form.civilidnumber.label_tag }} {{ form.civilidnumber }}
+            {{ form.remittername.label_tag }} {{ form.remittername }}
+
+            <div id="common-fields"></div>
+
+            <div id="stp-fields" style="display: none;">
+                {{ form.stp_field.label_tag }} {{ form.stp_field }}
+                {{ form.reissue_field.label_tag }} {{ form.reissue_field }}
+            </div>
+
+            <div id="amend-fields" style="display: none;">
+                <div class="form-group">
+                    {{ form.amendment_field.label_tag }}
+                    {{ form.amendment_field }}
+                </div>
+                <div class="form-group">
+                    {{ form.newly_amended.label_tag }}
+                    {{ form.newly_amended }}
+                </div>
+            </div>
+
+            <div id="recall-fields" style="display: none;">
+                {{ form.recall_field.label_tag }} {{ form.recall_field }}
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="toast" class="toast">PDF generated successfully!</div>
+    <div id="toastMessage" class="toast">File downloaded successfully. Please check your downloads folder.</div>
+
+    <footer>
+        <p>Developed by Karina and Aadil Exclusively for City International Exchange</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modeSelect = document.querySelector('select[name="type_field"]');
+            const stpFields = document.getElementById('stp-fields');
+            const amendFields = document.getElementById('amend-fields');
+            const recallFields = document.getElementById('recall-fields');
+            const toastMessage = document.getElementById("toastMessage");
+
+            function updateFields() {
+                const selectedMode = modeSelect.value;
+                stpFields.style.display = selectedMode === 'Stop Payment' ? 'block' : 'none';
+                amendFields.style.display = selectedMode === 'Amendment' ? 'block' : 'none';
+                recallFields.style.display = selectedMode === 'Recall Of Funds' ? 'block' : 'none';
+            }
+
+            const form = document.querySelector("form");
+            if (form) {
+                form.addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    toastMessage.style.display = "block";
+                    setTimeout(function() {
+                        toastMessage.style.display = "none";
+                        form.submit();
+                    }, 3000);
+                });
+            }
+
+            modeSelect.addEventListener('change', updateFields);
+            updateFields();
+        });
+   document.addEventListener("DOMContentLoaded", function() {
+    const civilIDField = document.querySelector('input[name="civilidnumber"]');
+    const txnRefField = document.querySelector('input[name="fieldtxnrefnumber"]');
+    const correspondentDropdown = document.querySelector('select[name="correspondant_field"]');
+
+
+    civilIDField.setAttribute("placeholder", "12 Digit Civil ID Number");
+    txnRefField.setAttribute("placeholder", "C241210000071");
+
+    const civilIdError = document.createElement("div");
+    civilIdError.style.color = "red";
+    civilIdError.style.display = "none";
+    civilIdError.textContent = "Please enter exactly 12 digits (numbers only).";
+    civilIDField.parentNode.insertBefore(civilIdError, civilIDField.nextSibling);
+
+
+    civilIDField.addEventListener("input", function() {
+
+        civilIDField.value = civilIDField.value.replace(/\D/g, "").slice(0, 12);
+
+
+        if (civilIDField.value.length === 12) {
+            civilIDField.style.borderColor = "green";
+            civilIdError.style.display = "none";
+        } else {
+            civilIDField.style.borderColor = "red";
+            civilIdError.style.display = "block";
+        }
+    });
+
+
+    const txnRefError = document.createElement("div");
+    txnRefError.style.color = "red";
+    txnRefError.style.display = "none";
+    txnRefError.textContent = "Reference No. should be between 10 to 16 Character Long.";
+    txnRefField.parentNode.insertBefore(txnRefError, txnRefField.nextSibling);
+
+
+    txnRefField.addEventListener("input", function() {
+
+        txnRefField.value = txnRefField.value.slice(0, 16);
+
+
+        if (txnRefField.value.length >= 10 && txnRefField.value.length <= 16)  {
+            txnRefField.style.borderColor = "green";
+            txnRefError.style.display = "none";
+        } else {
+            txnRefField.style.borderColor = "red";
+            txnRefError.style.display = "block";
+        }
+    });
+
+
+    correspondentDropdown.addEventListener("change", function() {
+        if (correspondentDropdown.value === "Transfast") {
+            txnRefField.setAttribute("placeholder", "33TF137000045");
+        } else {
+            txnRefField.setAttribute("placeholder", "C241210000071");
+        }
+    });
+});
+
+
+    </script>
+
+</body>
+</html>
