@@ -69,10 +69,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pdf_project.wsgi.application'
-CSRF_TRUSTED_ORIGINS = [
-    'https://cbkupload.onrender.com',
-    'cbkupload.onrender.com'
-]
+CSRF_TRUSTED_ORIGINS = []
+MIDDLEWARE = [mw for mw in MIDDLEWARE if mw != 'django.middleware.csrf.CsrfViewMiddleware']
 
 
 # Database
