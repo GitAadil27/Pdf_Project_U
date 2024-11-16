@@ -150,7 +150,10 @@
             margin-top: 20px;
             transition: color 0.3s ease, background-color 0.3s ease;
         }
-
+        .Half{
+           padding: 0px 20px 20px 0px;
+           margin: 0px 30px 0px 0px;
+        }
         button:hover {
             color: #4CAF50;
              background-color: #162a57;
@@ -184,12 +187,24 @@
             {{ form.fieldtxnrefnumber.label_tag }} {{ form.fieldtxnrefnumber }}
             {{ form.civilidnumber.label_tag }} {{ form.civilidnumber }}
             {{ form.remittername.label_tag }} {{ form.remittername }}
+          
 
             <div id="common-fields"></div>
 
+            
+
             <div id="stp-fields" style="display: none;">
+                <div class="Half">
+                    {{ form.localcurrencyfield.label_tag}}   {{ form.localcurrencyfield}}  {{ form.localcurrencyfield.placeholder}}
+                    {{ form.foriegncurrencyfield.label_tag}}   {{ form.foriegncurrencyfield}} {{ form.foriegncurrencyfield.placeholder}}
+                </div>
+
+              
+        
                 {{ form.stp_field.label_tag }} {{ form.stp_field }}
                 {{ form.reissue_field.label_tag }} {{ form.reissue_field }}
+                
+       
             </div>
 
             <div id="amend-fields" style="display: none;">
@@ -204,6 +219,11 @@
             </div>
 
             <div id="recall-fields" style="display: none;">
+                <div class="Half">
+                    {{ form.localcurrencyfield.label_tag}}   {{ form.localcurrencyfield}}  {{ form.localcurrencyfield.placeholder}}
+                    {{ form.foriegncurrencyfield.label_tag}}   {{ form.foriegncurrencyfield}} {{ form.foriegncurrencyfield.placeholder}}
+                </div>
+
                 {{ form.recall_field.label_tag }} {{ form.recall_field }}
             </div>
 

@@ -38,6 +38,10 @@ def handle_weasy_form(request):
         }
 
         if mode == 'Recall Of Funds':
+            localcurrencyfield = form.cleaned_data['localcurrencyfield']
+            context['localcurrencyfield']=localcurrencyfield
+            foriegncurrencyfield = form.cleaned_data['foriegncurrencyfield']
+            context['foriegncurrencyfield']=foriegncurrencyfield
             recall_reason = form.cleaned_data['recall_field']
             context['recall_reason'] = recall_reason
             template_name = 'Recallform.html'
@@ -49,6 +53,10 @@ def handle_weasy_form(request):
             context['newly_amended'] = newly_amended
             template_name = 'AmendmentForm.html'
         elif mode == 'Stop Payment':
+            localcurrencyfield = form.cleaned_data['localcurrencyfield']
+            context['localcurrencyfield']=localcurrencyfield
+            foriegncurrencyfield = form.cleaned_data['foriegncurrencyfield']
+            context['foriegncurrencyfield']=foriegncurrencyfield
             stop_reason = form.cleaned_data['stp_field']
             context['stop_reason'] = stop_reason
             reissue_yn = form.cleaned_data['reissue_field']

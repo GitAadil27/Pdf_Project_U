@@ -63,6 +63,7 @@
             padding-left: 40px;
             position: relative;
         }
+        
 
         .form-row label {
             width: 200px;
@@ -208,9 +209,20 @@
         </div>
 
         <div class="form-row">
+            <label>Local Currency</label>
+            <input type="text" value="{{ localcurrencyfield }}">
+        </div>
+       
+        <div class="form-row">
+            <label>Foriegn Currency</label>
+            <input type="text" value="{{ foriegncurrencyfield }}">
+        </div>
+
+        <div class="form-row">
             <label>Stop Payment Reason</label>
             <input type="text" value="{{ stop_reason }}" readonly>
         </div>
+        
 
         <div class="form-row">
             <label>Reissue</label>
