@@ -28,11 +28,11 @@ SECRET_KEY = 'django-insecure-s9tlp$709+8eu%m6b0v3dt@4q@tku$*!+10f#n=))(3mz(78*q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','cbkupload.onrender.com']
 
 
 # Application definition
-
+CSRF_TRUSTED_ORIGINS = ['https://cbkupload.onrender.com']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
