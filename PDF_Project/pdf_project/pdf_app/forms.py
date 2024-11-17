@@ -20,8 +20,8 @@ class TransactionForms(forms.Form):
     correspondant_field = forms.ChoiceField(choices = correspondant_options, required = True)
     fieldtxnrefnumber = forms.CharField(label = "Transaction Reference Number", max_length = 16, required = True)
     civilidnumber = forms.IntegerField(label = "Customer CIVIL ID",validators=[validate_12_digit_integer], required=True )
-    localcurrencyfield = forms.DecimalField(label = "Local Currency",decimal_places=3, required=False , widget=forms.NumberInput(attrs={'placeholder': 'Enter FC amount'}) )
-    foriegncurrencyfield = forms.DecimalField(label = "Foriegn Currency",decimal_places=3, required=False , widget=forms.NumberInput(attrs={'placeholder': 'Enter FC amount'}))
+    localcurrencyfield = forms.DecimalField(label = "Local Currency", required=False , widget=forms.NumberInput(attrs={'placeholder': 'Enter FC amount'}) )
+    foriegncurrencyfield = forms.DecimalField(label = "Foriegn Currency", required=False , widget=forms.NumberInput(attrs={'placeholder': 'Enter FC amount'}))
     remittername = forms.CharField(label = "Remitter Name", required = True)
     amendment_options = [('Beneficiary name change','Beneficiary name change'), ('Beneficiary account change','Beneficiary account change'), ('Beneficiary bank details change','Beneficiary bank details change'),
                          ('Beneficiary branch name change','Beneficiary branch name change'),
